@@ -19,7 +19,7 @@ public class SimpleDice {
 		System.out.println("Would you like to play with 1 die or 2 (Enter 1 or 2)?");
 		Scanner in= new Scanner(System.in);
 		int answer = in.nextInt();
-		if (answer == 1) {
+		if (answer == 1) { 
 		onegame.OneDie();}
 		if (answer == 2) {
 		onegame.TwoDice(); }

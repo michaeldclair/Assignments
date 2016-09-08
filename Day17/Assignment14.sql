@@ -367,14 +367,19 @@ select concat(student.first_name, ' ', student.last_name) as "Student", major.de
 	where student.id = 2;  
 
 -- Queries which classes a student has taken
-select description as 'Classes Taken' from class where id in (
-	select class_id from student_class_relationship where student_id = 2);
+select concat(student.first_name, ' ', student.last_name) as "Student", major.description as "Major", class.description as "Required Classes Taken" from student
+	join major on student.major_id = major.id
+	join major_class_relationship on major.id = major_class_relationship.major_id
+	join class on major_class_relationship.class_id = class.id 
+	where student.id = 2 and class_id in (select class_id from student_class_relationship where student_id = 2);  
 
 -- Queries which classes a student still needs to take for their major
-select description as 'Classes Not Yet Taken' from class where id in (
-	select class_id from major_class_relationship 
-	where major_id = (select major_id from student where id = 2) 
-	and class_id not in (select class_id from student_class_relationship where student_id = 2));
+select concat(student.first_name, ' ', student.last_name) as "Student", major.description as "Major", class.description as "Required Classes Still Needed" from student
+	join major on student.major_id = major.id
+	join major_class_relationship on major.id = major_class_relationship.major_id
+	join class on major_class_relationship.class_id = class.id 
+	where student.id = 2 and class_id not in (select class_id from student_class_relationship where student_id = 2);  
+
 
 -- Queries which classes are required for a given major
 select major.description as "Major", class.description as "Needed Classes" from major

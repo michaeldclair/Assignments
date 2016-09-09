@@ -1,7 +1,9 @@
+drop procedure if exists Insert_Student;
 drop table if exists prerequisite;
 drop table if exists student_class_relationship;
 drop table if exists major_class_relationship;
 drop table if exists assignment;
+drop table if exists grade;
 drop table if exists class;
 drop table if exists instructor;
 drop table if exists student;
@@ -38,6 +40,11 @@ create table class (
  description varchar(20),
  instructor_id int,
  foreign key (instructor_id) references instructor(id)
+);
+
+create table grade (
+ id int primary key auto_increment,
+ description varchar(30)
 );
 
 create table assignment (
@@ -159,6 +166,12 @@ create table prerequisite (
  insert class (description, instructor_id) values ('Education 351', 4);
  insert class (description, instructor_id) values ('Education 352', 5);
  insert class (description, instructor_id) values ('Education 353', 6);
+
+ insert grade (description) values ('Incomplete');
+ insert grade (description) values (values ('Complete and Unsatisfactory');
+ insert grade (description) values 'Complete and Satisfactory');
+ insert grade (description) values ('Exceeds Expectations');
+ insert grade (description) values ('Not Graded');
 
  insert assignment (student_id, assignment_nbr, grade_id, class_id) values (1, 1, 1, 2);
  insert assignment (student_id, assignment_nbr, grade_id, class_id) values (2, 1, 2, 1);
@@ -358,6 +371,77 @@ create table prerequisite (
 
 
 
+-- Procedure for ensuring SAT is between 400 & 1600 and GPA is between 0.0 and 5.0
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insert_Student`(
+	IN FirstName varchar(30), 
+	IN LastName varchar(30), 
+	IN SAT int, 
+	IN GPA Decimal(5,1), 
+	IN MajorDescription varchar(50)
+)
+BEGIN
+    DECLARE MajorId int;
+	-- Check SAT between 400 and 1600 inclusive
+	IF SAT < 400 OR SAT > 1600 THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'SAT is out of range (400 <= x <= 1600)';
+	END IF;
+    -- Check GPA between 0 <= x <= 5.0
+    IF GPA < 0.0 OR GPA > 5.0 THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'GPA is out of range (0 <= x <= 5.0)';
+	END IF;
+    -- Get the major.id from major where major.description is eq MajorDescription
+    SELECT id into MajorId from major where description = MajorDescription;
+    -- All data edited, insert the student
+    INSERT student (first_name, last_name, sat, gpa, major_id)
+		VALUES (FirstName, LastName, SAT, GPA, MajorId);
+END
+//
+DELIMITER ;
+
+
+
+
+
+
+
+
+-- Procedure for ensuring a student can not enroll in a class unless the prerequisites have been met
+
+
+DROP PROCEDURE IF EXISTS Enroll_For_Class;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Enroll_For_Class`(
+	IN StudentId int,  
+	IN ClassDescription varchar(50)
+)
+BEGIN
+    DECLARE ClassId int;
+
+
+	IF (select count(*) from(
+	select prereq from (
+	select prereq from prerequisite where class_id in (select id from class where class.description = ClassDescription)) a
+	where a.prereq not in
+	(select class_id from student_class_relationship where student_class_relationship.student_id = StudentId)) b) > 0
+
+			THEN
+				SIGNAL SQLSTATE '45000'
+					SET MESSAGE_TEXT = 'Prerequisites needed for that class';
+	END IF;
+	SELECT class.id into ClassId from class where class.description = ClassDescription;
+	INSERT student_class_relationship (student_id, class_id) 
+		VALUES (StudentId, ClassId);
+	END
+//
+
+DELIMITER ;
+
+
+
 
 -- Queries all classes in a student's major
 select concat(student.first_name, ' ', student.last_name) as "Student", major.description as "Major", class.description as "Required Classes" from student
@@ -399,4 +483,13 @@ select t1.description as "Searched Class", t2.description as "Prerequisites"  fr
 	join class t2 on prerequisite.prereq = t2.id
 	where t1.description  = "English 303";
 
+
+-- Tests Insert_Student, once successfully, twice failing
+call Insert_Student('Willy','Works',1200,3.0,'Accounting');
+call Insert_Student('Sally','SatTooLow',200,3.0,'Accounting');
+call Insert_Student('G.P.','Faker',1200,7.0,'Accounting');
+
+-- Tests Enroll_For_Class, once successfully, once failing
+call Enroll_For_Class(10, 'English 101');
+call Enroll_For_Class(10, 'English 103');
 

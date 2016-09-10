@@ -168,8 +168,8 @@ create table prerequisite (
  insert class (description, instructor_id) values ('Education 353', 6);
 
  insert grade (description) values ('Incomplete');
- insert grade (description) values (values ('Complete and Unsatisfactory');
- insert grade (description) values 'Complete and Satisfactory');
+ insert grade (description) values ('Complete and Unsatisfactory');
+ insert grade (description) values ('Complete and Satisfactory');
  insert grade (description) values ('Exceeds Expectations');
  insert grade (description) values ('Not Graded');
 

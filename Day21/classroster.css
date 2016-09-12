@@ -1,0 +1,28 @@
+.nameclass {
+	font-weight: bold;
+}
+.supervisorclass {
+	color:red;
+}
+.startdateclass {
+	font-style: italic;
+}
+
+table, tr, td {
+	border:1px solid grey;
+	border-collapse: collapse;
+
+}
+div {
+	width:49%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: text-top;
+}
+/* This is for an id */
+#leftdiv {
+	color:blue;
+}
+#rightdiv {
+	color:red;
+}

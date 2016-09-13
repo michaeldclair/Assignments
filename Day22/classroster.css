@@ -1,0 +1,88 @@
+.nameclass {
+	font-weight: bold;
+}
+.supervisorclass {
+	color:red;
+}
+.startdateclass {
+	font-style: italic;
+}
+
+.footerclass {
+	background-color: black;
+	color: silver;
+	text-align: center;
+}
+
+.ulclass {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.liclass {
+    float: left;
+}
+
+.liaclass {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+.nomargin {
+	margin: 0;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+body {
+	background-image: url(http://images.all-free-download.com/images/graphiclarge/blue_abstract_background_310971.jpg);
+	background-size: 100% auto;
+	}
+
+table, tr, td {
+	border:1px solid black;
+	border-collapse: collapse;
+
+}
+div {
+	width:49%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: text-top;
+}
+/* This is for an id */
+#leftdiv {
+	color:blue;
+	text-align: left;
+	border:2px solid red;
+	padding: 0px;
+	padding-top:0px;
+	margin: 0px;
+
+
+}
+#rightdiv {
+	color:red;
+	text-align: left;
+	border:2px solid red;
+	padding: 0px;
+	padding-top:0px;
+	margin: 0px;
+}
+
+#grad {
+    background: black; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(silver, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(silver, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(silver, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(silver, white); /* Standard syntax */
+}

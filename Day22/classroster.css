@@ -59,6 +59,11 @@ div {
 	text-align: center;
     vertical-align: text-top;
 }
+
+
+.bigborder {
+	border:2x solid red;
+}
 /* This is for an id */
 #leftdiv {
 	color:blue;

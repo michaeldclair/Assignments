@@ -130,6 +130,7 @@ create table prerequisite (
  insert instructor (first_name, last_name, major_id, years_experience, tenure) 
 	values ('Solomon', 'Studies', 7, 10, 1);
 
+
  insert class (description, instructor_id) values ('English 101', 13);
  insert class (description, instructor_id) values ('English 102', 13);
  insert class (description, instructor_id) values ('English 103', 13);
@@ -249,7 +250,7 @@ create table prerequisite (
  insert student_class_relationship (student_id, class_id) values (10, 24);
 
 -- English prereqs
- insert prerequisite (class_id, prereq) values (1, NULL);
+-- insert prerequisite (class_id, prereq) values (1, NULL);
  insert prerequisite (class_id, prereq) values (2, 1); 
  insert prerequisite (class_id, prereq) values (3, 1); 
  insert prerequisite (class_id, prereq) values (3, 2);
@@ -288,7 +289,7 @@ create table prerequisite (
  insert prerequisite (class_id, prereq) values (9, 8);
 
 -- Math prereqs
- insert prerequisite (class_id, prereq) values (10, NULL);
+-- insert prerequisite (class_id, prereq) values (10, NULL);
  insert prerequisite (class_id, prereq) values (11, 10); 
  insert prerequisite (class_id, prereq) values (12, 10); 
  insert prerequisite (class_id, prereq) values (12, 11);
@@ -319,13 +320,13 @@ create table prerequisite (
  insert prerequisite (class_id, prereq) values (17, 16);
 
 -- History prereqs
- insert prerequisite (class_id, prereq) values (18, NULL);
+-- insert prerequisite (class_id, prereq) values (18, NULL);
  insert prerequisite (class_id, prereq) values (19, 18);
  insert prerequisite (class_id, prereq) values (20, 18);
  insert prerequisite (class_id, prereq) values (20, 19);
 
 -- Computer Science prereqs
- insert prerequisite (class_id, prereq) values (21, NULL);
+-- insert prerequisite (class_id, prereq) values (21, NULL);
  insert prerequisite (class_id, prereq) values (22, 21);  
  insert prerequisite (class_id, prereq) values (23, 21);
  insert prerequisite (class_id, prereq) values (23, 22);
@@ -343,7 +344,7 @@ create table prerequisite (
  insert prerequisite (class_id, prereq) values (26, 25);
 
 -- Psychology prereqs
- insert prerequisite (class_id, prereq) values (27, NULL);
+-- insert prerequisite (class_id, prereq) values (27, NULL);
  insert prerequisite (class_id, prereq) values (28, 27);
  insert prerequisite (class_id, prereq) values (29, 28);
  insert prerequisite (class_id, prereq) values (29, 28);
@@ -352,7 +353,7 @@ create table prerequisite (
  insert prerequisite (class_id, prereq) values (30, 29);
 
 -- Math prereqs
- insert prerequisite (class_id, prereq) values (31, NULL);
+-- insert prerequisite (class_id, prereq) values (31, NULL);
  insert prerequisite (class_id, prereq) values (32, 31);  
  insert prerequisite (class_id, prereq) values (33, 31);
  insert prerequisite (class_id, prereq) values (33, 32);

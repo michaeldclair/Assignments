@@ -1,0 +1,23 @@
+HK 16 x 20 x 4
+
+SY 26 x 15 x 2.5
+
+NY 28 x 12 x 4
+
+WS 30 x 18 x 2
+
+
+
+
+Insert student values (1, 'Eric', 'Ephram', 3.0, 1300, 1);
+Insert student values (2, 'Greg', 'Gould', 4.0, 1400, 2);
+Insert student values (3, 'Adam', 'Ant', 4.0, 1200, 3);
+Insert student values (4, 'Howard', 'Hess', 3.0, 1350, 4);
+Insert student values (5, 'Charles', 'Caldwell', 2.0, 1250, 5);
+Insert student values (6, 'James', 'Joyce', 3.0, 1100, 6);
+Insert student values (7, 'Doug', 'Dumas', 1.0, 500, 7);
+Insert student values (8, 'Kevin', 'Kraft', 3.0, 900, 1);
+Insert student values (9, 'Frank', 'Fountain', 4.0, 1500, 2);
+Insert student values (10, 'Brian', 'Biggs', 3.0, 1200, 3);
+Insert student values (11, 'Willy', 'Works', 3.0, 1200, 2);
+Insert student values (13, 'George', 'Washington', 4.0, 1400, 0);

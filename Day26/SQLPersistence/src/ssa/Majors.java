@@ -29,7 +29,8 @@ public class Majors extends Student {
 	}
 	
 	public void assignMajor(Student student, Major major) throws SQLException{
-		String sql = ("Update student set first_name = '" + student.getFirstName() + "', last_name = '" + student.getLastName() + "', sat = " + student.getSat() + ", gpa = " + student.getGpa() + ", major_id = " + major.getId() + "where id = " + student.getId());
+		String sql = ("Update student set first_name = '" + student.getFirstName() + "', last_name = '" + student.getLastName() + "', sat = " + student.getSat() + ", gpa = " + student.getGpa() + ", major_id = " + major.getId() + " where id = " + student.getId());
+		student.setMajor(major);
 		db.executeSQLUpdate(sql);
 	}	
 	
@@ -41,6 +42,15 @@ public class Majors extends Student {
 		String dbUrl = prop.getProperty("dburl");
 		db = new SQLdb(dbUrl, user, pass);
 	}
+	
+	public Major getById(int majorId) throws SQLException{
+		List<Major> majors = select("Select * from major where id = " +  majorId);
+		if(majors.isEmpty()) 
+			return null;
+		return majors.get(0);
+	}
+	
+	
 	public ArrayList<Major> getAllMajors () throws SQLException {
 		return select("Select * from major");
 	}
@@ -73,8 +83,7 @@ public class Majors extends Student {
 		db.executeSQLUpdate(sql);
 	}
 	public void insertMajor(Major major) throws SQLException{
-		String sql = ("Insert major (id, description, req_sat) values (" + major.getId() + ", '" + major.getDescription() +"', " + "0)");
-		System.out.println(sql);
+		String sql = ("Insert major (description, req_sat) values ('" + major.getDescription() +"', " + "0)");
 		db.executeSQLUpdate(sql);
 	}
 

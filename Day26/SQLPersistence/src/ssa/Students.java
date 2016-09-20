@@ -81,8 +81,18 @@ public class Students extends Student {
 	}
 	
 	public void delete(int studentId) throws SQLException{
-		String sql = ("Delete from student where id = " +  studentId);
-		db.executeSQLUpdate(sql);
+		try {
+		ResultSet rs = db.executeSQLQuery("Select * from student_class_relationship where student_id = " +  studentId);
+		if (rs.next()) {
+			System.out.println("Student must be removed from classes before he can be deleted");
+}
+		else{
+			String sql = ("Delete from student where id = " +  studentId);
+			db.executeSQLUpdate(sql); 
+		}
+		}
+		catch (SQLException ex) { 
+			ex.printStackTrace(); }
 	}
 	public void insert(Student student) throws SQLException{
 		String sql = ("Insert student (id, first_name, last_name, sat, gpa) values (" + student.getId() + ", '" + student.getFirstName() + "', '" + student.getLastName() + "', " + student.getSat() + ", " + student.getGpa() + ")");
@@ -92,6 +102,12 @@ public class Students extends Student {
 		String sql = ("Update student set first_name = '" + student.getFirstName() + "', last_name = '" + student.getLastName() + "', sat = " + student.getSat() + ", gpa = " + student.getGpa() + "where id = " + student.getId());
 		db.executeSQLUpdate(sql);
 	}
-	
-	
+	public void enrollForClass(Student student, int classId) throws SQLException{
+		String sql = ("Insert student_class_relationship (student_id, class_id) values (" + student.getId() + ", " + classId + ")");
+		db.executeSQLUpdate(sql);
+	}
+	public void leaveClass(Student student, int classId) throws SQLException{ 
+		String sql = ("Delete from student_class_relationship where student_id = " + student.getId() + " and class_id = " + classId);
+		db.executeSQLUpdate(sql);
+	}
 	}

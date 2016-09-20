@@ -8,15 +8,12 @@ public class Mainline {
 	public static void main(String[] args) throws SQLException {
 		
 		try {
-			
 		Students students = new Students();
-		students.delete(290);
 			
 		//Retrieves and displays a single student by ID
 		System.out.println(students.getById(180));
 		
 		//Retrieves and displays all students
-		
 		ArrayList<Student> allStudents = students.getAll();
 		for (Student student: allStudents) {
 			System.out.println(student);
@@ -29,17 +26,23 @@ public class Mainline {
 
 		System.out.println("******INSERTING NEW STUDENT*********");
 		//Inserts new Student
-		Student tomJones = new Student(290, "Tom", "Jones", 1300, 2.0);
-		students.insert(tomJones);
-		System.out.println(students.getById(290));
+		Student newStudent = new Student("Yvonne", "Yvoffe", 1300, 2.0);
+		students.insert(newStudent);
+
+		allStudents = students.getAll();
+		for (Student student: allStudents) {
+			System.out.println(student);
+		}
 		
 		System.out.println("******UPDATING NEW STUDENT*********");
-		//Changes and then updates that new Student
-		tomJones.setLastName("Bones");
-		tomJones.setSat(1600);
-		tomJones.setGpa(4.0);
-		students.update(tomJones); 
-		System.out.println(students.getById(290));
+		//  Creates a Student, identifying the chosen student's ID here rather than in the method parameters
+		//  so that the update method works on a Student object.
+		Student brian = students.getById(190);
+		brian.setLastName("Bigger");
+		brian.setSat(1250);
+		brian.setGpa(3.6);
+		students.update(brian); 
+		System.out.println(students.getById(190));
 		
 		System.out.println("******SELECTING GPAS BETWEEN 2.00 AND 2.99*********");
 		//Selects by GPA after user enters minimum and maximum limits
@@ -48,16 +51,41 @@ public class Mainline {
 			System.out.println(student);
 		}
 		
+		
+
+		System.out.println("**FAILS DELETING**");
+		students.enrollForClass(brian, 10101);
+		students.delete(brian.getId());
+		System.out.println("**SUCCEEDS DELETING**");
+		students.leaveClass(brian, 10101);
+		students.delete(brian.getId());
+		
+		allStudents = students.getAll();
+		for (Student student: allStudents) {
+			System.out.println(student);
+		}
+		
+		// Adds Brian back for more testing
+		students.insert(brian);
+		
+		//Gets all majors
 		Majors majors = new Majors();
 		ArrayList<Major> allMajors = majors.getAllMajors();
 		for (Major major: allMajors) {
 			System.out.println(major);
+		}
+		//Creates new major
+		Major Astronomy = new Major("Astronomy");
+		majors.insertMajor(Astronomy);
 		
+		allMajors = majors.getAllMajors();
+		for (Major major: allMajors) {
+			System.out.println(major);
 		}
 		
-		Major Astronomy = new Major(9, "Astronomy");
-		majors.insertMajor(Astronomy);
-//		majors.assignMajor(tomJones, Astronomy);
+		//Assigns a major to a student
+		Major Math = majors.getById(4);
+		majors.assignMajor(brian, Math);
 		}catch(Exception ex){
 			ex.printStackTrace();
 }

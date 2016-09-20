@@ -8,11 +8,9 @@ public class Major {
 	
 	public Major(){};
 	
-	public Major(int aId, String aDescription) {
-		this.id = aId;
+	public Major(String aDescription) {
 		this.description = aDescription;
 		this.req_sat=0;
-		
 	}
 
 	
@@ -37,7 +35,7 @@ public class Major {
 		String msg = String.format("%3d %-20s",
 				this.id,
 				this.description);
-		return msg;
+		return msg; 
 	}
 	
 	

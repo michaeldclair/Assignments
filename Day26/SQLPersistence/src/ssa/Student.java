@@ -7,21 +7,11 @@ public class Student {
 	private String lastName;
 	private int sat;
 	private double gpa;
-	private int majorId;
 	private Major major;
 	
 	public Student(){};
 	
-	public Student(int aId, String aFirstName, String aLastName, int aSat, double aGpa, int aMajorId) {
-		this.id = aId;
-		this.firstName = aFirstName;
-		this.lastName = aLastName;
-		this.sat = aSat;
-		this.gpa = aGpa;
-		this.majorId = aMajorId;
-	}
-	public Student(int aId, String aFirstName, String aLastName, int aSat, double aGpa) {
-		this.id = aId;
+	public Student(String aFirstName, String aLastName, int aSat, double aGpa) {
 		this.firstName = aFirstName;
 		this.lastName = aLastName;
 		this.sat = aSat;
@@ -67,15 +57,15 @@ public class Student {
 	public void setGpa(double gpa) {
 		this.gpa = gpa;
 	}
-
-	public int getMajorId() {
-		return majorId;
-	}
-
-	public void setMajorId(int majorId) {
-		this.majorId = majorId;
-	}
 	
+	public Major getMajor() {
+		return major;
+	}
+
+	public void setMajor(Major major) {
+		this.major = major;
+	}
+
 	public void display(Student student) {
 		System.out.println(student.getId() + " " + student.getFirstName() + " " + student.getLastName() + "      " + student.getGpa() + " " + student.getSat());
 	}

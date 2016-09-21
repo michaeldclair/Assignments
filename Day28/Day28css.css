@@ -1,0 +1,47 @@
+head {
+  text-align: center;
+
+}
+
+body {
+  text-align: center;
+  background-image: url(http://www.preciousangels1.com/uploads/OCC-Daycare-Website-Background-82.jpg);
+  background-size: 100% auto;
+  }
+
+
+.invalid {
+    text-align: center;
+    color: red;
+    width:50px;
+    height:50px;
+    font-size:200%;
+    border: 2px solid black;
+    }
+
+.divisibleByTwo {
+  text-align: center;
+    font-style: italic;
+    width:50px;
+    height:50px;
+    font-size:200%;
+    border: 2px solid black;
+    }
+
+.sevenInIt {
+    color: green;
+    }
+
+
+.inputWidth {
+    text-align: center;
+    width:50px;
+    height:50px;
+    font-size:200%;
+    border: 2px solid black;
+}
+
+.userChoice {
+    width:50px;
+}
+

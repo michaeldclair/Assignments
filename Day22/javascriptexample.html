@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A page to just play with styles</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+	<script>
+	
+	var triesLeft = 6;
+	var answer = Math.floor(Math.random() * 100) + 1;
+	var resultMessage = $(".result");
+
+	$(document).ready(function() {
+		resultMessage.hide();
+
+	$("h1").text("Something else");
+
+	$("#record-guess").click(function() {
+	console.log("Clicked button");
+	triesLeft--;
+	$("#try-count").text("Tries left: " + triesLeft);
+
+	var guess = $("#guess").val();
+	console.log("guess = " + guess);
+
+	var newRow =   $("<tr><td>" + guess + "</td></tr>");
+
+	if (guess > answer) {
+		result= "High";
+	} else if (guess < answer) {
+		result = "Low";
+	} else if (isNaN(guess)) {
+		$("#guess").css("border-color", "red");
+	} else {
+		result = "You win"
+		resultMessage.text("You win. Answer is " + answer) ;
+
+	}
+
+	if (triesLeft === 0) {
+		resultMessage.text("You lose. Answer is " + answer);
+
+		$("#record-guess").attr("disabled", "disabled");
+	}
+
+	resultMessage.show();
+
+	var newCell = $("<td>" + result + "</td>");
+	newRow.append( newCell );
+
+	$("table").prepend( newRow );
+
+
+	});
+		$("#try-count").text("Tries left: " + triesLeft);
+	});
+
+	</script>
+</head>
+<body>
+<h1>It works</h1>
+<input type="text" id="guess">
+<button id = "record-guess">Submit</button>
+<table>
+<thead>
+<tr>
+<th>Guess</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p id="try-count"></p>
+<p class=result></p>
+</body>
+</html>

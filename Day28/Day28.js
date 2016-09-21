@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   var resultMessage = $(".result");
   resultMessage.hide();
+  var useRandom = false;
 
   function valueCheck() {
       if (document.getElementById('number').value > 8) {
@@ -60,16 +61,26 @@ $(document).ready(function() {
       incrementValue = Number(document.getElementById('userChoice').value);
 }
   function incrementValueCheckRandom() {
-      incrementValue2 = Math.floor(Math.random() * 21) -10;
-      document.getElementById('userChoice2').value = incrementValue2;
+      incrementValue = Math.floor(Math.random() * 21) -10;
+      document.getElementById('userChoice').value = incrementValue;
   }
   $("#increment-button").click(function() {
-    incrementValueCheckUser();
+    if (useRandom == false) {
+          incrementValueCheckUser();
+    }
+    if (useRandom == true) {
+          incrementValueCheckRandom()
+    }
     document.getElementById('number').value = Number(document.getElementById('number').value) + incrementValue;
      valueCheck();
 });
   $("#decrement-button").click(function() {
-    incrementValueCheckUser();
+       if (useRandom == false) {
+          incrementValueCheckUser();
+    }
+    if (useRandom == true) {
+          incrementValueCheckRandom()
+    }
     document.getElementById('number').value = Number(document.getElementById('number').value) - incrementValue;
     valueCheck();
 });
@@ -78,19 +89,14 @@ $(document).ready(function() {
     valueCheck();
 });
 
-
-  $("#increment-button2").click(function() {
-    incrementValueCheckRandom();
-    document.getElementById('number2').value = Number(document.getElementById('number2').value) + incrementValue2;
-     valueCheckRandom();
-});
-  $("#decrement-button2").click(function() {
-    incrementValueCheckRandom();
-    document.getElementById('number2').value = Number(document.getElementById('number2').value) - incrementValue2;
-    valueCheckRandom();
-});
-  $("#reset-button2").click(function() {
-    document.getElementById('number2').value = 0;
-    valueCheckRandom();
+    $("#userType").click(function() {
+        var input = document.getElementById ("userType");
+            var isChecked = input.checked;
+            if (isChecked) {
+              useRandom = true;
+            }
+            if (!isChecked) {
+              useRandom = false;
+            }
 });
 });

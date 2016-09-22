@@ -25,6 +25,13 @@ $(document).ready(function() {
         } 
         }
 
+              if ((document.getElementById('number').value == 0) && useRandom == true) {
+        resultMessage.text("You hit zero!").show();
+      }
+      else {
+        resultMessage.hide();
+      }
+
   }
 
   function valueCheckRandom() {

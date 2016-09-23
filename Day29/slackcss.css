@@ -1,0 +1,27 @@
+#topDiv {
+	width:100%;
+}
+
+#channelDiv {
+  float: left ;
+  width: 49% ;
+}
+#postDiv {
+  float: right;
+  width: 49%;
+}
+
+.inputWidth {
+    text-align: center;
+    width:98%;
+    border: 2px solid black;
+    text-align: left;
+}
+
+#wholeDiv {
+	width: 75%;
+	border: 1px solid silver;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-bottom: 50%;
+}

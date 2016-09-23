@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="slack.js"></script>
+    <script src="getSlackToken.js"></script>
+    <link rel="stylesheet" type="text/css" href="slackcss.css">
+  </head>
+  
+  <body>
+ <center>
+<div id = "wholeDiv">
+
+    <p></p>
+    <center>
+    <div id ="topDiv">
+          <img src="https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2016-07-28/64068682054_504ba5be405402e51ff4_88.png" height=100px>
+     <img src="https://a.slack-edge.com/ae57/img/slack_api_logo.png" height=100px>
+     </div>
+     </center> 
+
+     <div id="channelDiv">
+
+
+      <h1>Channels</h1>
+      <form action="" id = "channelform">
+      <ul id="channels">
+
+      </ul>
+      <ul id="channels2" style= "display: none">
+      </ul>
+      	</form>
+    </div>
+
+    <div id = "postDiv">
+ 
+      <h1>Post Message</h1>
+    <textarea id="message" type="textarea" class = inputWidth placeholder="Enter Description" rows="10"></textarea>
+    <button id="postButton">Post</button>
+    <p></p>
+    <input type ="button" value="Show Private Channels" id = "toggleButton"></input>
+ <!--   <button id="toggleButton" value="Show Private Channels">Show Private Channels</button> -->
+ <p></p>
+<a id = "aToggle" href="#"  class="button js-button" role ="button" value="Show Private Channels">Show Private Channels</a>
+
+</div>
+    </div>
+  </div></center>
+  </body>
+</html>

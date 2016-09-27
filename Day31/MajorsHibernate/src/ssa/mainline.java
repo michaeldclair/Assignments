@@ -19,7 +19,7 @@ public class mainline {
 		
 		majormethod.insertMajor("Astronomy", 1450);
 		majormethod.updateMajorDescription("Education", "Education Studies");
-		majormethod.deleteMajor("General Studies");
+		majormethod.deleteMajor("Finance");
 		majormethod.displayAllMajors();
 		majormethod.selectById(3);
 		

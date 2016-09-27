@@ -8,6 +8,8 @@ import java.util.Objects;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.ConstraintViolationException;
+
 import ssa.Major;
 
 public class MajorMethods{
@@ -74,7 +76,9 @@ public class MajorMethods{
 			session.beginTransaction();
 			session.createQuery("delete from Major where description = '" + aMajorDescription + "'").executeUpdate();
 			session.getTransaction().commit();
-		}catch(Exception ex){ex.printStackTrace();}
+		}
+		catch(ConstraintViolationException ex2){System.out.println("Error: Cannot delete major that has major-class relationship");}
+		catch(Exception ex){ex.printStackTrace();}
 		finally {}
 	}
 	

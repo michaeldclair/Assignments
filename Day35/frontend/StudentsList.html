@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consuming REST web service in Javascript</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="StudentsList.css">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+	<script type="text/javascript">
+
+
+			function deleteUser(studentId) {
+				 deleteUrl = "http://localhost:8080/student/delete/" + studentId
+			$.ajax({
+        		url: deleteUrl,
+        		type: 'DELETE'
+    		})
+}
+
+		function editUser(rowNumber) {
+				 satBox = "#satEditBox" + rowNumber;
+				 gpaBox = "#gpaEditBox" + rowNumber;
+				 $(satBox).attr('disabled', !$(satBox).attr('disabled'));
+				 $(gpaBox).attr('disabled', !$(gpaBox).attr('disabled'));
+//			$.ajax({
+//        		url: deleteUrl,
+ //       		type: 'DELETE'
+ //   		})
+}
+		$(document).ready(function() {
+
+			
+
+			$.ajax({
+        		url: "http://localhost:8080/student"
+    		}).then(function(data) {
+    			console.log(data);
+    			console.log(data.first_name);
+    			for (i=0; i<data.length; i++) {
+    			var studentUrl = "file:///C:/Assignments/Day29/IndividualStudent.html?id=" + data[i].id;
+    			var fullName = data[i].first_name + " " + data[i].last_name;
+    			var deleteUrl = ""
+    			console.log(studentUrl);
+    			console.log(fullName);
+    			//var studentString = "<tr><td>" + fullName + "</td><td>" + data[i].sat + "</td><td>" + (data[i].gpa).toFixed(2) + "</td></tr>";
+    			
+				var studentString = 
+				"<tr><td><a href='" + studentUrl + "'>" + fullName + "</a></td><td><input id='satEditBox" + i + "' type='text' disabled value=" + data[i].sat + "></td><td><input id='gpaEditBox" + i + "' type='text' disabled value=" + (data[i].gpa).toFixed(2) + "></td><td><a href='#edit' id = 'editSwitch' onclick='editUser(" + i + ")'>Edit</a></td><td><a href='#delete' onclick='deleteUser(" + data[i].id + ")'>Delete</a></td></tr>";
+				console.log(studentString);
+
+				$("#studentList").append(studentString);}
+				$("#studentList").tablesorter();
+    		});
+    		
+    		 { 
+         
+    }
+
+
+		}); <!-- end ready -->
+
+	</script>
+</head>
+<body>
+		<a href="file:///C:/Assignments/Day29/StudentsList.html" onclick="deleteUser(199)">Click</a>
+      	<table id = "studentList" class="table table-striped" style="border: 2px solid black; width: 75%" >
+      <thead>
+        <tr style="font-weight: bold"><th >Full Name</th><th>SAT</th><th>GPA</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+</body>
+</html>

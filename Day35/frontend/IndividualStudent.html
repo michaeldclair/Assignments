@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consuming REST web service in Javascript</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="StudentsList.css">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript">
+
+
+// I copied this function from StackOverflow
+      function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+     var urlEnding = getParameterByName('id');
+      console.log(urlEnding);
+      console.log("Hello");
+      var fullUrl = "http://localhost:8080/student/" + urlEnding;
+      console.log(fullUrl);
+
+		$(document).ready(function() {
+
+			$.ajax({
+            url: fullUrl
+    		}).then(function(data) {
+    			var studentString = "<tr><td>" + data.first_name + " " + data.last_name + "</td><td>" + data.sat + "</td><td>" + (data.gpa).toFixed(2) + "</td></tr>";
+    			console.log(studentString);
+				$("#studentList").append(studentString);
+    		});
+
+
+		}); <!-- end ready -->
+
+	</script>
+</head>
+<body>
+      	<table id = "studentList" class="table table-striped" style="border: 2px solid black; width: 75%" >
+      <thead>
+        <tr>
+          <th>Student List</th>
+        </tr>
+        <tr style="font-weight: bold"><td >Full Name</td><td>SAT</td><td>GPA</td><td><a href=EDIT>Edit</a></td><td><a href="DELETE">DELETE</a></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+</body>
+</html>

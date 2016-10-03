@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app = "StudentMod">
+<head>
+	<title>Student Table Display Using Angular</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" type="text/javascript"></script>
+	<script src="StudentTableDisplayUsingAngular.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="StudentTableDisplayUsingAngular.css">
+	</head>
+	<!-- The 'as' is just like as in SQL, it renames, nothing else -->
+	<body ng-controller="StudentCtrl as ctrl">
+	<button ng-click="ctrl.refresh()">Refresh</button>
+	<p />
+		<table>
+		<tr style="font-weight: bold">
+			<td width = 100px font-weight: bold>ID</td>
+			<td width = 100px>First Name</td>
+			<td width = 100px>Last Name</td>
+			<td width = 100px>GPA</td>
+			<td width = 100px>SAT</td>
+			<td width = 100px>Major ID</td>
+			</tr>
+
+			<tr ng-repeat="student in ctrl.students" ng-show="student.vis">
+			<td width = 100px>{{student.id}}</td>
+			<td width = 100px>{{student.firstname}}</td>
+			<td width = 100px>{{student.lastname}}</td>
+			<td width = 100px>{{student.gpa}}</td>
+			<td width = 100px>{{student.sat}}</td>
+			<td width = 100px>{{student.majorid}}</td>
+			<td><button ng-click="ctrl.hide($index)">Hide Student Details</button></td>
+		</tr>
+		</table>
+	<p />
+	
+	<p>Enter a minimum SAT Value</p>
+	<input id="satbox" type="text" value="0" />
+	<button ng-click="ctrl.satcheck()">Submit</button>
+	</body>
+	</html>

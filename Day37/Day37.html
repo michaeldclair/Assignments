@@ -15,24 +15,24 @@
 <center>
 <h1>Student Form</h1>
       <div ng-app="">
-    <form id = "studentForm" name="studentForm" style="width: 30%">
+    <form id = "studentForm" name="studentForm" style="width: 50%">
     <table id="fntable">
     <tr><td style="width:20%">
-    First Name:</td><td> <input id = "firstname" name="firstname" type="text" class="form-control" ng-model="firstname" required minlength="4"></td></tr></table><table>
+    First Name:</td><td> <input id = "firstname" name="firstname" type="text" class="form-control" ng-model="firstname" required minlength="4" placeholder = "Adam"></td></tr></table><table>
 
     <span ng-show = "studentForm.firstname.$error.minlength">First Name Must be At Least 4 Characters</span>
 <tr><td style="width:20%">
-    Last Name:</td><td> <input id = "lastname" name="lastname" type="text" class="form-control" ng-model="lastname" required minlength="4"></td></tr></table><table>
+    Last Name:</td><td> <input id = "lastname" name="lastname" type="text" class="form-control" ng-model="lastname" required minlength="4" placeholder = "Ant"></td></tr></table><table>
 
      <span ng-show = "studentForm.lastname.$error.minlength">Last Name Must be At Least 4 Characters</span>
 <tr><td style="width:20%">
-    SAT: </td><td><input id="sat" name="sat" type="number" class="form-control" ng-model="sat" min="0" max="1600" required></td></tr></table><table>
+    SAT: </td><td><input id="sat" name="sat" type="number" class="form-control" ng-model="sat" min="0" max="1600" required placeholder=1300></td></tr></table><table>
 
      <span ng-show = "studentForm.sat.$error.min">SAT cannot be below Zero</span>
      <span ng-show = "studentForm.sat.$error.max">SAT cannot be above 1600</span>
 
 <tr><td style="width:20%">
-    GPA: </td><td><input id="gpa" name="gpa" type="number" step="any" class="form-control" ng-model="gpa" min="0" max="4" required></td></tr></table>
+    GPA: </td><td><input id="gpa" name="gpa" type="number" step="any" class="form-control" ng-model="gpa" min="0" max="4" required placeholder=3.2></td></tr></table>
 
      <span ng-show = "studentForm.gpa.$error.min">GPA cannot be below Zero</span>
      <span ng-show = "studentForm.gpa.$error.max">GPA cannot be above 4.0</span>

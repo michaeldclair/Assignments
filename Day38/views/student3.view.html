@@ -1,0 +1,49 @@
+<script>
+angular.module("StudentMod", [])
+	.controller("StudentCtrl", ["$http", function($http) {
+		var self = this;
+	
+		self.refresh = function() {
+			for (var std of self.students) {
+				std.vis = true;
+			}
+		};
+		self.hide = function(studentId) {
+			self.students[studentId].vis = false;
+		};
+
+		self.satcheck = function() {
+		var minimumSat = document.getElementById('satbox').value;
+			for (var std of self.students) {
+					std.vis = true;
+				if (std.sat < minimumSat) {
+					std.vis = false;
+				}
+			}
+		};
+</script>
+
+<div ng-controller="StudentCtrl as ctrl">>
+
+	<h1>Students</h1>
+	<table class = "table table-striped tableStuff">
+		<tr style="font-weight: bold">
+			<td width = 100px font-weight: bold>ID</td>
+			<td width = 100px>First Name</td>
+			<td width = 100px>Last Name</td>
+			<td width = 100px>GPA</td>
+			<td width = 100px>SAT</td>
+			<td width = 100px>Major ID</td>
+			</tr>
+
+			<tr ng-repeat="student in ctrl.students" ng-show="student.vis">
+			<td width = 100px>{{student.id}}</td>
+			<td width = 100px>{{student.first_name}}</td>
+			<td width = 100px>{{student.last_name}}</td>
+			<td width = 100px>{{student.gpa}}</td>
+			<td width = 100px>{{student.sat}}</td>
+			<td width = 100px>{{student.major_id}}</td>
+			<td><button ng-click="ctrl.hide($index)">Hide Student Details</button></td>
+		</tr>
+		</table>
+</div>

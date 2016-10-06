@@ -1,0 +1,120 @@
+
+<script>
+function deleteUser(studentId) {
+				 deleteUrl = "http://localhost:8080/student/delete/" + studentId
+       
+			$.ajax({
+        		url: deleteUrl,
+        		type: 'DELETE'
+    		})
+    		location.reload();
+}
+
+    function insertUser() {
+      console.log("Inserting");
+         insertUrl = "http://localhost:8080/student/add/" 
+          fNameIn = $(fNameInsert).val();
+          lNameIn = $(lNameInsert).val();
+          satIn = $(satInsert).val();
+          gpaIn = $(gpaInsert).val();
+          var insertData = { 
+                "first_name": fNameIn,
+                "last_name": lNameIn,
+                "sat": satIn,
+                "gpa": gpaIn }
+      $.ajax({
+            url: insertUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: insertData
+        })
+      location.reload();
+}
+
+		function editUser(rowNumber, studentId) {
+				 satBox = "#satEditBox" + rowNumber;
+				 gpaBox = "#gpaEditBox" + rowNumber;
+				 $(satBox).attr('disabled', !$(satBox).attr('disabled'));
+				 $(gpaBox).attr('disabled', !$(gpaBox).attr('disabled'));
+				 switchName = "editSwitch" + rowNumber
+				 if (document.getElementById(switchName).innerHTML == "Edit") {
+   				document.getElementById(switchName).innerHTML= "Submit"; }
+  				else {
+  				newSat = $(satBox).val();
+  				newGpa = $(gpaBox).val();
+  				console.log(newSat);
+  				console.log(newGpa);
+  				updateUrl = "http://localhost:8080/student/update/" + studentId
+          var updateData = { 
+                "sat": newSat,
+                "gpa": newGpa }
+  				$.ajax({
+  					url: updateUrl,
+  					type: "POST",
+  					dataType: 'json',
+  					data: updateData
+  				})
+    			document.getElementById(switchName).innerHTML= "Edit";
+				};
+
+
+}
+		$(document).ready(function() {
+
+			
+
+			$.ajax({
+        		url: "http://localhost:8080/student"
+    		}).then(function(data) {
+    			for (i=0; i<data.length; i++) {
+    		//	var studentUrl = "http://localhost:8081/Day38.html#/individualstudent?id=" + data[i].id;
+          var studentUrl = "http://127.0.0.1:8081/Day38.html#/student/" + data[i].id;
+    			var fullName = data[i].first_name + " " + data[i].last_name;
+    			var deleteUrl = ""
+    			console.log(studentUrl);
+    			console.log(fullName);
+    			
+				var studentString = 
+				"<tr><td><a href='" + studentUrl + "'>" + fullName + "</a></td><td><input id='satEditBox" + i + "' type='text' disabled value=" + data[i].sat + "></td><td><input id='gpaEditBox" + i + "' type='text' disabled value=" + (data[i].gpa).toFixed(2) + "></td><td><button id = 'editSwitch" + i + "' onclick='editUser(" + i + "," + data[i].id + ")'>Edit</button></td><td><button onclick='deleteUser(" + data[i].id + ")'>Delete</button></td></tr>";
+				console.log(studentString);
+
+				$("#studentList").append(studentString);}
+	//			$("#studentList").tablesorter();
+    		});
+    		
+    		 { 
+         
+    }
+
+
+		});
+</script>
+
+<div>
+<p />
+<h1>Student List Linked to Database</h1>
+<p />
+
+      	<table id = "studentList" class="table table-striped" style="border: 2px solid black; width: 75%" >
+      <thead>
+        <tr style="font-weight: bold"><th >Full Name</th><th>SAT</th><th>GPA</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p />
+    <table id = "insertStudent" class="table table-striped" style="border: 2px solid black; width: 75%" >
+      <thead>
+        <tr style="font-weight: bold"><th>First Name</th><th>Last Name</th><th>SAT</th><th>GPA</th></tr>
+      </thead>
+      <tbody>
+      <tr><td><input id = "fNameInsert" type = "text" /></td>
+      <td><input id = "lNameInsert" type = "text" /></td>
+      <td><input id = "satInsert" type = "text" /></td>
+      <td><input id = "gpaInsert" type = "text" /></td>
+      <td><button onclick="insertUser()">Insert User</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+</div>
